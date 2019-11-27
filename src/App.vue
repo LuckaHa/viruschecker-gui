@@ -50,7 +50,7 @@ export default {
       this.$router.push('/driversInfo')        
     },
     multiScanFile() {
-      this.$router.push('/scanFile')
+      this.$router.push('/multiScanFile')
     }
   },
   computed: {

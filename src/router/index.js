@@ -19,7 +19,7 @@ export default new VueRouter({
       component: DriversInfo
     },
     {
-      path: '/scanFile',
+      path: '/multiScanFile',
       name: 'MultiScanFile',
       component: MultiScanFile
     }
