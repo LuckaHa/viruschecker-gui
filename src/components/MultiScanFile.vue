@@ -6,6 +6,7 @@
             <h1>Scan report for {{wholeResponse.data.report.filename}}</h1>
             <!-- <p>Time: <span>{{ wholeResponse.data.report.date | moment("YYYY-MM-DD, hh:mm:ss") }}</span></p> -->
             <!-- <span>{{ wholeResponse.data.report.date | formatDate}}</span> -->
+            <p>Time: {{myDate}}</p>
             <h2>Scan result</h2>
             <div v-if="wholeResponse.data.report.status === 'OK'">
               <p class="green--text">{{wholeResponse.data.report.status}}</p><br>
@@ -26,6 +27,9 @@
                 <div class="red--text">{{result.malwareDescription}}</div> {{result.antivirus}}  {{result.virusDatabaseVersion}}
               </div>
               <v-divider style="width: 20px;"></v-divider>
+            </div>
+            <div v-if="checked">
+              <p class="red--text">TODO: VirusTotal</p><br>
             </div>
             <!-- <div v-for="data in wholeResponse" :key="data">data: {{data}}</div> -->
           </div>
@@ -55,7 +59,9 @@
                 <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
               </label>
               <br>
-            </div>
+            </div><br>
+            <!-- <v-checkbox label="Upload hash to external services like VirusTotal"></v-checkbox> -->
+            <input type="checkbox" value="Upload hash to external services like VirusTotal" v-model="checked" @change="check(checked)">Upload hash to external services like VirusTotal
             <v-btn v-on:click="submitFile()">Scan file</v-btn>
           </div>
       </v-flex>
@@ -65,16 +71,6 @@
 
 <script>
   import axios from 'axios'
-  // Vue.use(require('vue-moment'))
-  // import moment from 'moment'
-
-  /*
-   Vue.filter('formatDate', function(value) {
-      if (value) {
-        return moment(String(value)).format('MM/DD/YYYY hh:mm');
-      };
-    })
-    **/
 
   export default {
     // Defines the data used by the component
@@ -83,13 +79,21 @@
         wholeResponse: Object,
         file: '',
         loaded: false,
-        loading: false
-      }
+        loading: false,
+        checked: false
+      };
+      let timestamp = { seconds: 1549843200, nanoseconds: 0 };     
+      let myDate = new Date(timestamp.seconds * 1000);
     },
 
     methods: {
+      check (e) {
+        checked = !checked;
+        console.log(checked)
+      },
+      
       // Submits the file to the server
-      submitFile(){
+      submitFile () {
             this.loading = true;
             // Initialize the form data
             let formData = new FormData();
@@ -110,7 +114,9 @@
         this.wholeResponse = response,
         this.loading = false,
         this.loaded = true,
-        console.log('SUCCESS');  
+        timestamp = this.wholeResponse.data.report.date,   
+        myDate = new Date(timestamp.seconds * 1000),
+        console.log('SUCCESS');
         })
         .catch(function(){
           console.log('FAILURE');
@@ -118,7 +124,7 @@
       },
 
       // Handles a change on the file upload
-      handleFileUpload(){
+      handleFileUpload () {
         this.file = this.$refs.file.files[0];
       },
     }
