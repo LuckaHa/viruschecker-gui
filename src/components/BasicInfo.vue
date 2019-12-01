@@ -14,7 +14,10 @@
   <v-container v-else grid-list-xl>
     <v-layout wrap>
       <div id="app">
-        <p>Gateway Version: {{ wholeResponse.gatewayVersion }}</p>
+        <h1>Welcome</h1><br>
+        <p>This is a web interface of the VirusChecker, version: {{ wholeResponse.gatewayVersion }}</p>
+        <p>These are the currently deployed antivirus drivers.</p>
+        <p>Antivirus: Kaspersky, Microsoft, VirusTotal <br> Driver version: 0.23.0</p>
       </div>
   </v-layout>
 </v-container>

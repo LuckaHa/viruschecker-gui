@@ -5,12 +5,13 @@
           <div class="container">
             <h1>Scan report for {{wholeResponse.data.report.filename}}</h1>
             <!-- <p>Time: <span>{{ wholeResponse.data.report.date | moment("YYYY-MM-DD, hh:mm:ss") }}</span></p> -->
+            <!-- <span>{{ wholeResponse.data.report.date | formatDate}}</span> -->
             <h2>Scan result</h2>
             <div v-if="wholeResponse.data.report.status === 'OK'">
-              <p class="green--text">{{wholeResponse.data.report.status}}</p><br><br>
+              <p class="green--text">{{wholeResponse.data.report.status}}</p><br>
             </div>
             <div v-else>
-              <p class="red--text">{{wholeResponse.data.report.status}}</p><br><br>
+              <p class="red--text">{{wholeResponse.data.report.status}}</p><br>
             </div>
             <p>SHA-256 <br> {{wholeResponse.data.sha256}}</p>
             <p>SHA-1 <br> {{wholeResponse.data.sha1}}</p>
@@ -54,8 +55,8 @@
                 <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
               </label>
               <br>
-              <v-btn v-on:click="submitFile()">Scan file</v-btn>
             </div>
+            <v-btn v-on:click="submitFile()">Scan file</v-btn>
           </div>
       </v-flex>
   </v-layout>
@@ -65,6 +66,15 @@
 <script>
   import axios from 'axios'
   // Vue.use(require('vue-moment'))
+  // import moment from 'moment'
+
+  /*
+   Vue.filter('formatDate', function(value) {
+      if (value) {
+        return moment(String(value)).format('MM/DD/YYYY hh:mm');
+      };
+    })
+    **/
 
   export default {
     // Defines the data used by the component
@@ -110,7 +120,7 @@
       // Handles a change on the file upload
       handleFileUpload(){
         this.file = this.$refs.file.files[0];
-      }
+      },
     }
   }
 </script>

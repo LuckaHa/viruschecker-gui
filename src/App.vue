@@ -21,6 +21,10 @@
       <v-btn flat @click="multiScanFile">
         <span class="mr-2">Multican File</span>
       </v-btn>
+
+      <v-btn flat @click="searchReports">
+        <span class="mr-2">Search Reports</span>
+      </v-btn>
     </v-toolbar>
 
     <v-content>
@@ -35,7 +39,6 @@ import MultiScanFile from '@/components/MultiScanFile'
 export default {
   name: 'App',
   components: {
-    MultiScanFile
   },
   data () {
     return {
@@ -43,14 +46,17 @@ export default {
     }
   },
   methods: {
-    getGatewayVersion() {
+    getGatewayVersion () {
       this.$router.push('/')        
     },
-    getDriversInfo() {
+    getDriversInfo () {
       this.$router.push('/driversInfo')        
     },
-    multiScanFile() {
+    multiScanFile () {
       this.$router.push('/multiScanFile')
+    },
+    searchReports () {
+      this.$router.push('/scanReportBy?search=')
     }
   },
   computed: {
