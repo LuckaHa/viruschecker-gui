@@ -3,7 +3,7 @@
     <v-layout wrap>
       <v-flex xs4>
           <div class="container">
-          <p>Loaded</p>
+          <p>{{port}} <br> {{wholeResponse}}</p>
           </div>
       </v-flex>
     </v-layout>
@@ -17,7 +17,6 @@
         :width="8"
         color="blue">
       </v-progress-circular>
-      <p>Loading</p>
     </div>
   </v-container>
 
@@ -27,7 +26,6 @@
           <div class="container">
             <h1>Scan reports</h1>
             <input v-model="message" placeholder="edit me">
-            <p>Message is: {{ message }}</p>
             <v-btn v-on:click="submit()">Search</v-btn>
           </div>
       </v-flex>
@@ -36,7 +34,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 
 export default {
   // Defines the data used by the component
@@ -51,9 +49,21 @@ export default {
   },
 
   methods: {
-    // Submits the file to the server
+    // Submits message to the server
     submit () {
-
+          this.loading = true;
+          axios.get( '/scanReportBy/${message}')
+          //axios.get( '/scanReportBy/'.concat(message))
+          .then(response => {
+      this.wholeResponse = response,
+      this.loading = false,
+      this.loaded = true,
+      console.log('/scanReportBy/${message}'),
+      console.log('SUCCESS')
+      })
+      .catch(function(){
+          console.log('FAILURE')
+        })
     }
   }
 }
@@ -63,4 +73,3 @@ export default {
   .v-progress-circular
     margin: 1rem
 </style>
-

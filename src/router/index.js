@@ -25,7 +25,7 @@ export default new VueRouter({
       component: MultiScanFile
     },
     {
-      path: '/scanReportBy?search=',
+      path: '/scanReportBy',
       name: 'SearchReports',
       component: SearchReports
     }
