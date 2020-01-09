@@ -27,9 +27,13 @@ In the folder viruschecker/client-web/build/libs/ open cmd and run:
 	192.168.1.1	
 
 II. Then start this GUI:
-1. Install:
+1. Add Vue.js to Chrome as a Chrome extension:
+	https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
+
+Run the following commands in the terminal of your development environment.
+2. Install axios:
 	npm install --save axios vue-axios
 	
-2. In folder where project viruschecker-gui is run:
-	npm install
+3. In the folder, where project viruschecker-gui is, run:
 	npm run serve -- --port 3000
+	or just: npm run serve (chosen port will be written in the terminal)

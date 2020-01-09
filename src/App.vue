@@ -11,7 +11,7 @@
       </v-toolbar-title>
 
       <v-btn flat @click="getGatewayVersion">
-        <span class="mr-2">Gateway Version</span>
+        <span class="mr-2">Home</span>
       </v-btn>
 
       <v-btn flat @click="getDriversInfo">
@@ -19,7 +19,7 @@
       </v-btn>
 
       <v-btn flat @click="multiScanFile">
-        <span class="mr-2">Multican File</span>
+        <span class="mr-2">Scanner</span>
       </v-btn>
 
       <v-btn flat @click="searchReports">

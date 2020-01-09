@@ -6,7 +6,7 @@
             <h1>Scan report for {{wholeResponse.data.report.filename}}</h1>
             <!-- <p>Time: <span>{{ wholeResponse.data.report.date | moment("YYYY-MM-DD, hh:mm:ss") }}</span></p> -->
             <!-- <span>{{ wholeResponse.data.report.date | formatDate}}</span> -->
-            <p>Time: {{myDate}}</p>
+            <!-- <p>Time: {{myDate}}</p> -->
             <h2>Scan result</h2>
             <div v-if="wholeResponse.data.report.status === 'OK'">
               <p class="green--text">{{wholeResponse.data.report.status}}</p><br>
@@ -45,6 +45,8 @@
         :width="8"
         color="blue">
       </v-progress-circular>
+      <br>
+      <h4>Scanning...</h4>
     </div>
   </v-container>
 
@@ -53,15 +55,21 @@
       <v-flex xs4>
           <div class="container">
             <h1>Scan file</h1><br>
-            <p>Scan can take up to 50 seconds.</p><br>
+            <p>Scan can take up to 50 seconds.</p>
             <div class="large-12 medium-12 small-12 cell">
               <label>
-                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                <div v-if="this.file == ''">
+                  <v-btn @click="$refs.file.click()">Choose file</v-btn>
+                </div>
+                <div v-else>
+                  <v-btn @click="$refs.file.click()">Choose file</v-btn>File uploaded.
+                </div>
+                <input v-show="false" ref="file" type="file" id="file" @change="handleFileUpload()">
               </label>
               <br>
             </div><br>
-            <!-- <v-checkbox label="Upload hash to external services like VirusTotal"></v-checkbox> -->
-            <input type="checkbox" value="Upload hash to external services like VirusTotal" v-model="checked" @change="check(checked)">Upload hash to external services like VirusTotal
+            <input type="checkbox" value="Upload hash to external services like VirusTotal" v-model="checked" @change="check(checked)"> Upload hash to external services like VirusTotal
+            <br><br>
             <v-btn v-on:click="submitFile()">Scan file</v-btn>
           </div>
       </v-flex>
